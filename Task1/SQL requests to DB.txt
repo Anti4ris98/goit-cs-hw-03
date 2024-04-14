@@ -13,9 +13,8 @@ SELECT * FROM users WHERE user_id NOT IN (SELECT user_id FROM tasks);
 5. Додати нове завдання для конкретного користувача:
 INSERT INTO tasks (user_id, task_description, status) VALUES ('15', 'Go home', '2');
 
-
 6. Отримати всі завдання, які ще не завершено:
-SELECT * FROM tasks WHERE status != 'completed';
+SELECT * FROM tasks WHERE status != '3';
 
 7. Видалити конкретне завдання за його task_id:
 DELETE FROM tasks WHERE id = '2';
@@ -29,10 +28,8 @@ UPDATE users SET name = 'Ilon Pusk' WHERE user_id = '14';
 10. Отримати кількість завдань для кожного статусу:
 SELECT status, COUNT(*) FROM tasks GROUP BY status;
 
-
 11. Отримати завдання, які призначені користувачам з певною доменною частиною електронної пошти:
 SELECT * FROM tasks JOIN users ON tasks.user_id = users.user_id WHERE email LIKE '%@example.com';
-
 
 12. Отримати список завдань, що не мають опису:
 SELECT * FROM tasks WHERE task_description IS NULL;
@@ -41,4 +38,4 @@ SELECT * FROM tasks WHERE task_description IS NULL;
 SELECT users.*, tasks.* FROM users INNER JOIN tasks ON users.user_id = tasks.user_id WHERE tasks.status = '2';
 
 14. Отримати користувачів та кількість їхніх завдань:
-SELECT users.*, COUNT(tasks.task_id) FROM users LEFT JOIN tasks ON users.user_id = tasks.user_id GROUP BY users.user_id;
+SELECT users.*, COUNT(tasks.id) FROM users LEFT JOIN tasks ON users.user_id = tasks.user_id GROUP BY users.user_id;
